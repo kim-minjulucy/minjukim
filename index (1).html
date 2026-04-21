@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minju Kim</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8f8f6;
+    --white: #ffffff;
+    --text: #111110;
+    --text-muted: #888884;
+    --text-light: #b8b8b4;
+    --accent: #111110;
+    --border: #e4e4e0;
+    --border-dark: #c8c8c4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(248, 248, 246, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-left {
+    padding: 10rem 3rem 5rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-right {
+    padding: 10rem 3rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    display: block;
+  }
+
+  .hero-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hero-contact a {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 300;
+  }
+
+  .hero-contact a:hover { color: var(--text); }
+
+  .hero-contact span {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  .hero-bio {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.9;
+    max-width: 380px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid var(--border-dark);
+    padding: 0.3rem 0.75rem;
+    border-radius: 0;
+  }
+
+  .resume-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--text);
+    padding: 0.65rem 1.2rem;
+    transition: all 0.2s;
+    width: fit-content;
+  }
+
+  .resume-link:hover {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  /* SECTIONS */
+  section {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-inner {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+  }
+
+  .section-sidebar {
+    padding: 4rem 3rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 400;
+    position: sticky;
+    top: 5rem;
+  }
+
+  .section-content {
+    padding: 4rem 3rem;
+  }
+
+  /* EXPERIENCE */
+  .exp-item {
+    padding-bottom: 2.8rem;
+    margin-bottom: 2.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exp-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .exp-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+
+  .exp-year {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    white-space: nowrap;
+    font-weight: 300;
+  }
+
+  .exp-role {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .exp-location {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+  }
+
+  .exp-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.85;
+  }
+
+  /* EDUCATION */
+  .edu-item {
+    padding-bottom: 2.2rem;
+    margin-bottom: 2.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .edu-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .edu-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .edu-school {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .edu-year {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    white-space: nowrap;
+    font-weight: 300;
+  }
+
+  .edu-degree {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.6;
+  }
+
+  /* SKILLS */
+  .skills-block {
+    margin-bottom: 2rem;
+  }
+
+  .skills-block:last-child { margin-bottom: 0; }
+
+  .skill-group-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+  }
+
+  .skills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.75rem;
+    font-weight: 300;
+    background: var(--white);
+  }
+
+  /* BEYOND */
+  .beyond-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1.5rem;
+    padding-bottom: 1.8rem;
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .beyond-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .beyond-cat {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 400;
+    padding-top: 0.15rem;
+  }
+
+  .beyond-text {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.85;
+  }
+
+  /* FOOTER */
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+  }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--text-light);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 8rem 1.5rem 3rem; }
+    .hero-right { padding: 3rem 1.5rem; }
+    .section-inner { grid-template-columns: 1fr; }
+    .section-sidebar { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem 1rem; }
+    .section-sidebar .section-label { position: static; }
+    .section-content { padding: 2rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+    .beyond-item { grid-template-columns: 1fr; gap: 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Minju Kim</span>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#beyond">Beyond</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-label">Portfolio</div>
+    <h1 class="hero-name">Minju<em>Kim</em></h1>
+    <div class="hero-contact">
+      <a href="mailto:minju.kim@kellogg.northwestern.edu">minju.kim@kellogg.northwestern.edu</a>
+      <a href="https://www.linkedin.com/in/lucy-minju-kim/" target="_blank">LinkedIn</a>
+      <span>Chicago, IL</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="hero-bio">MBA Candidate at Kellogg with five years of technology consulting experience. I help organizations navigate complexity — translating data, strategy, and human behaviour into decisions that stick.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Strategy</span>
+      <span class="hero-tag">Marketing</span>
+      <span class="hero-tag">Product</span>
+      <span class="hero-tag">Analytics</span>
+      <span class="hero-tag">Operations</span>
+    </div>
+    <a class="resume-link" href="#">Download Resume ↓</a>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-sidebar">
+      <div class="section-label">Experience</div>
+    </div>
+    <div class="section-content">
+
+      <div class="exp-item">
+        <div class="exp-top">
+          <span class="exp-company">Accenture</span>
+          <span class="exp-year">2020 — Present</span>
+        </div>
+        <div class="exp-role">Consultant</div>
+        <div class="exp-location">Chicago, IL · San Francisco, CA</div>
+        <p class="exp-desc">Technology consultant advising Fortune 500 clients across high-tech, sporting goods, telecommunications, and healthcare. Led cross-functional teams on strategy, operations, digital transformation, and large-scale marketing programs — including a project that secured an $80M engagement for the firm.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-sidebar">
+      <div class="section-label">Education</div>
+    </div>
+    <div class="section-content">
+
+      <div class="edu-item">
+        <div class="edu-top">
+          <span class="edu-school">Kellogg School of Management, Northwestern University</span>
+          <span class="edu-year">2024 — 2026</span>
+        </div>
+        <div class="edu-degree">MBA Candidate · Finance & Marketing</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-top">
+          <span class="edu-school">Northwestern University</span>
+          <span class="edu-year">2016 — 2020</span>
+        </div>
+        <div class="edu-degree">B.A. Cognitive Science, Concentration in Cognitive Neuroscience<br>Minors in Music & Business Institutions</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-sidebar">
+      <div class="section-label">Skills</div>
+    </div>
+    <div class="section-content">
+
+      <div class="skills-block">
+        <div class="skill-group-label">Technical</div>
+        <div class="skills-wrap">
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Salesforce</span>
+          <span class="skill-tag">Microsoft Office</span>
+          <span class="skill-tag">Lucidchart</span>
+        </div>
+      </div>
+
+      <div class="skills-block">
+        <div class="skill-group-label">Certifications</div>
+        <div class="skills-wrap">
+          <span class="skill-tag">AWS Cloud Practitioner</span>
+          <span class="skill-tag">Microsoft Azure Fundamentals</span>
+          <span class="skill-tag">Salesforce Administrator</span>
+          <span class="skill-tag">Agile Certified Professional</span>
+          <span class="skill-tag">Leading with Analytics & AI — Kellogg</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND -->
+<section id="beyond">
+  <div class="section-inner">
+    <div class="section-sidebar">
+      <div class="section-label">Beyond Work</div>
+    </div>
+    <div class="section-content">
+
+      <div class="beyond-item">
+        <span class="beyond-cat">Music</span>
+        <p class="beyond-text">Classical flutist and electronic music composer. National competition finalist and concerto competition winner. Shares flute covers and original compositions on YouTube, TikTok, and SoundCloud.</p>
+      </div>
+
+      <div class="beyond-item">
+        <span class="beyond-cat">Writing</span>
+        <p class="beyond-text">Former tech journalist for the Northwestern Business Review. Founded MusicPsyche, a blog exploring the psychology of music, with 100+ daily readers.</p>
+      </div>
+
+      <div class="beyond-item">
+        <span class="beyond-cat">Leadership</span>
+        <p class="beyond-text">President of Northwestern Undergraduate Psychology Association (500+ members). Launched a school-wide research fair and mentorship program supported by the Psychology Department.</p>
+      </div>
+
+      <div class="beyond-item">
+        <span class="beyond-cat">Community</span>
+        <p class="beyond-text">Music teacher for students with special needs; hospital volunteer; co-president of MUSE (Music for Us, Serving Everyone).</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2026 Minju Kim</span>
+  <span class="footer-copy">Chicago, IL</span>
+</footer>
+
+</body>
+</html>
